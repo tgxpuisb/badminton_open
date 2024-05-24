@@ -10,3 +10,18 @@ function wait(time) {
     setTimeout(r, time)
   })
 }
+
+async function main() {
+  const browser = await puppeteer.launch({
+    headless: false
+  })
+
+  await page.goto('http://account.zhongyulian.com/?menu=login')
+
+  await page.type('#phone_input', account)
+  await page.type('#phone_password', pwd)
+
+  await page.waitForSelector('.rtitle .ui', { timeout: 0})
+
+  
+}
