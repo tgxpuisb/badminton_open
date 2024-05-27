@@ -40,17 +40,17 @@ async function main() {
   // login success
 
   // 开始爬数据
-  const allPages = 30
+  const allPages = 30 // todo
   const startPage = 1
-  const selector = '#MemberEditor>table tbody td:nth-child(3) table tbody tr'
+  const selector = '#CompetitionListForm > table tbody tr'
   const results = []
 
   for (let i = startPage; i <= allPages; i++) {
 
-    await page.goto(`http://ycyl.zhongyulian.com/admin.php?a=memberlist&pp=100${i > 1 ? `&cp=${i}` : ''}`, { timeout: 0 })
+    await page.goto(`http://ycyl.zhongyulian.com/admin.php?ap=p8&pp=100${i > 1 ? `&cp=${i}` : ''}`, { timeout: 0 })
 
     await wait(15000)
-    await page.waitForSelector('#MemberEditor', { timeout: 0 })
+    await page.waitForSelector('#CompetitionListForm', { timeout: 0 })
     await wait(15000)
 
     // evaluate
@@ -59,10 +59,9 @@ async function main() {
       els.forEach(el => {
         const children = el.children
         list.push({
-          name: children[2].textContent,
-          id: children[3].textContent,
-          sex: children[5].textContent,
-          lastTime: children[12].textContent
+          name: children[0].textContent,
+          cid: children[5].firstChild.href.replace(/.+&id=/, ''),
+          startTime: children[3].textContent
         })
       })
       return list
@@ -70,7 +69,7 @@ async function main() {
 
     await wait(3000)
 
-    fs.writeFileSync(`./members/res-${i}.json`, JSON.stringify(result, undefined, 2), 'utf-8')
+    fs.writeFileSync(`./competitions/res-${i}.json`, JSON.stringify(result, undefined, 2), 'utf-8')
 
     results.push(result)
   }
@@ -83,7 +82,7 @@ async function main() {
     console.log(err)
   }
 
-  fs.writeFileSync('./members/output.csv', csv, 'utf-8')
+  fs.writeFileSync('./competitions/output.csv', csv, 'utf-8')
 
   browser.close()
 }
