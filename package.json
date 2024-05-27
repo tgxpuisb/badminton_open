@@ -1,0 +1,24 @@
+{
+  "name": "badminton_open",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgxpuisb/badminton_open.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tgxpuisb/badminton_open/issues"
+  },
+  "homepage": "https://github.com/tgxpuisb/badminton_open#readme",
+  "dependencies": {
+    "json2csv": "^6.0.0-alpha.2",
+    "lodash": "^4.17.21",
+    "puppeteer": "19.11.1"
+  }
+}
