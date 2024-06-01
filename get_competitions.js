@@ -40,7 +40,7 @@ async function main() {
   // login success
 
   // 开始爬数据
-  const allPages = 30 // todo
+  const allPages = 23 // todo
   const startPage = 1
   const selector = '#CompetitionListForm > table tbody tr'
   const results = []

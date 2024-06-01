@@ -40,14 +40,14 @@ async function main() {
   // login success
 
   // 开始爬数据
-  const allPages = 30
+  const allPages = 31
   const startPage = 1
   const selector = '#MemberEditor>table tbody td:nth-child(3) table tbody tr'
   const results = []
 
   for (let i = startPage; i <= allPages; i++) {
 
-    await page.goto(`http://ycyl.zhongyulian.com/admin.php?a=memberlist&pp=100${i > 1 ? `&cp=${i}` : ''}`, { timeout: 0 })
+    await page.goto(`http://ycyl.zhongyulian.com/admin.php?ap=p5&pp=100${i > 1 ? `&cp=${i}` : ''}`, { timeout: 0 })
 
     await wait(15000)
     await page.waitForSelector('#MemberEditor', { timeout: 0 })
@@ -62,6 +62,7 @@ async function main() {
           name: children[2].textContent,
           id: children[3].textContent,
           sex: children[5].textContent,
+          joinTime: children[11].textContent,
           lastTime: children[12].textContent
         })
       })
